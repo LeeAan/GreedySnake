@@ -1,0 +1,2 @@
+# GreedySnake
+Design greedy snake!
