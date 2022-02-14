@@ -1,3 +1,14 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<windows.h>
+typedef struct snake
+{
+	int x;
+	int y;
+	struct snake *next;
+}snake;
+snake *head;	//头指针
+snake *food;				//食物指针
 /*
 	设置光标位置
 */
@@ -79,7 +90,7 @@ void welcometogame()
     switch (n)
     {
     	case 1:					//选择开始游戏
-    		system("cls");
+    		system("cls");		//清屏
 			createMap();        //创建地图
 			initsnake();        //初始化蛇身
 			createfood();		//初始化食物
@@ -136,8 +147,125 @@ void explation()
     color(4);
     gotoxy(30,20);
     printf("tip5: Esc ：退出游戏");
-    getch();                //按任意键返回主界面
+    getch();                //按任意键返回主界面，建议用getchar或者system("pause")代替
     system("cls");
     printsnake();
     welcometogame();
+}
+/*
+	创建地图
+*/
+void createMap()
+{
+    int i,j;
+    for(i=0;i<58;i+=2)		//打印上下边框
+    {
+        gotoxy(i,0);
+		color(6);			//深绿色的边框
+        printf("□");
+        gotoxy(i,26);
+        printf("□");
+    }
+    for(i=1;i<26;i++)		//打印左右边框
+    {
+        gotoxy(0,i);
+        printf("□");                        
+        gotoxy(56,i);
+        printf("□");        
+    }
+	for(i = 2;i<56;i+=2)	//打印中间网格
+	{
+		for(j = 1;j<26;j++)
+		{
+			gotoxy(i,j);
+			color(3);
+			printf("■\n\n");
+		}
+	}
+}
+/*
+	初始化蛇身，画蛇身
+*/
+void initsnake()
+{
+    snake *tail;
+    int i;
+    tail=(snake*)malloc(sizeof(snake));	//从蛇尾开始，头插法，以x,y设定开始的位置
+    tail->x=24;				//蛇的初始位置（24,5）
+    tail->y=5;
+    tail->next=NULL;
+    for(i=1;i<=4;i++)       //设置蛇身，长度为5
+    {
+        head=(snake*)malloc(sizeof(snake)); //初始化蛇头
+        head->next=tail;    //蛇头的下一位为蛇尾
+        head->x=24+2*i;     //设置蛇头位置
+        head->y=5;
+        tail=head;          //蛇头变成蛇尾，然后重复循环
+    }
+    while(tail!=NULL)		//从头到尾，输出蛇身
+    {
+        gotoxy(tail->x,tail->y);
+		color(14);
+        printf("◆");       //输出蛇身，蛇身使用◆组成
+        tail=tail->next;    //蛇头输出完毕，输出蛇头的下一位，一直输出到蛇尾
+    }
+}
+/*
+	随机出现食物
+*/
+void createfood()
+{
+    snake *food_1;
+    srand((unsigned)time(NULL));        	//播种
+    food_1=(snake*)malloc(sizeof(snake));   //初始化food_1
+    while((food_1->x%2)!=0)    				//保证其为偶数，使得食物能与蛇头对齐，然后食物会出现在网格线上
+    {
+        food_1->x=rand()%52+2;              //食物随机出现，食物的x坐标在2~53
+    }
+    food_1->y=rand()%24+1;					//食物的y坐标在1~24
+    q=head;
+    while(q->next==NULL)
+    {
+        if(q->x==food_1->x && q->y==food_1->y) //判断蛇身是否与食物重合
+        {
+            free(food_1);               //如果蛇身和食物重合，那么释放食物指针
+            createfood();               //重新创建食物
+        }
+        q=q->next;
+    }
+    gotoxy(food_1->x,food_1->y);
+    food=food_1;
+	color(12);
+    printf("●");           //输出食物
+}
+void scoreandtips()
+{
+	File_out();				//调用File_out()，读取文件save.txt中的内容
+	gotoxy(64,4);			//确定打印输出的位置
+	color(11);				//设置颜色
+	printf("☆最高记录☆：%d",HighScore);	//打印最高分
+	gotoxy(64,8);
+	color(14);
+	printf("当前得分：%d  ",score);
+	color(15);
+	gotoxy(73,11);
+	printf("小 提 示");
+	gotoxy(60,13);
+	color(6);
+	printf("╬ ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ ╬");
+	gotoxy(60,25);
+	printf("╬ ┅┅┅┅┅┅┅┅┅┅┅┅┅┅┅ ╬");
+	color(3);
+	gotoxy(64,14);
+	printf("每个食物得分：%d分",add);
+	gotoxy(64,16);
+	printf("不能撞墙，不能咬到自己");
+	gotoxy(64,18);
+	printf("用↑ ↓ ← →分别控制蛇的移动");
+	gotoxy(64,20);
+	printf("F1键加速，F2键减速");
+	gotoxy(64,22);
+	printf("空格键暂停游戏");
+	gotoxy(64,24);
+    printf("Esc键退出游戏");
 }
