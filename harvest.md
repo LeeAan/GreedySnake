@@ -1,6 +1,6 @@
 ##### 1. gotoxyº¯Êý
-1. Í¨¹ýgotoxyº¯Êý¿ÉÒÔÉèÖÃ¹â±êµ½ÎÄ±¾ÆÁÄ»µÄÖ¸¶¨Î»ÖÃ£¬Èç¹ûÔÚ Turbo C »ò Borland C ÖÐÊ¹ÓÃ gotoxy º¯Êý£¬¾ÍÐèÒªÔÚÎÄ¼þÍ·²¿Ìí¼Ó°üº¬Í·ÎÄ¼þ conio.h´úÂë¡£
-2. ¶øÔÚ Visual C++ »ò GCC ÖÐÊ¹ÓÃ gotoxy º¯Êý£¬¾ÍÐèÒª°ÑÉÏÃæ×Ô¶¨ÒåµÄ gotoxy º¯ÊýÐ´ÔÚ×Ô¼ºµÄ³ÌÐòÖÐ¡£Í¬Ê±×¢ÒâWindows.hÍ·ÎÄ¼þ¡£
+Í¨¹ýgotoxyº¯Êý¿ÉÒÔÉèÖÃ¹â±êµ½ÎÄ±¾ÆÁÄ»µÄÖ¸¶¨Î»ÖÃ£¬Èç¹ûÔÚ Turbo C »ò Borland C ÖÐÊ¹ÓÃ gotoxy º¯Êý£¬¾ÍÐèÒªÔÚÎÄ¼þÍ·²¿Ìí¼Ó°üº¬Í·ÎÄ¼þ conio.h´úÂë¡£
+¶øÔÚ Visual C++ »ò GCC ÖÐÊ¹ÓÃ gotoxy º¯Êý£¬¾ÍÐèÒª°ÑÉÏÃæ×Ô¶¨ÒåµÄ gotoxy º¯ÊýÐ´ÔÚ×Ô¼ºµÄ³ÌÐòÖÐ¡£Í¬Ê±×¢ÒâWindows.hÍ·ÎÄ¼þ¡£
 ***ÐÞ¸ÄÎÄ×ÖÑÕÉ«µÄº¯ÊýÍ¬Àí¡£***
 ##### 2. \b
 `printf("ÇëÑ¡Ôñ[1 2 3]:[ ]\b\b");        //\bÎªÍË¸ñ£¬Ê¹µÃ¹â±ê´¦ÓÚ[]ÖÐ¼ä`
@@ -27,6 +27,7 @@ exit(x)£¨x²»Îª0£©¶¼±íÊ¾Òì³£ÍË³ö£¬Õâ¸öxÊÇ·µ»Ø¸ø²Ù×÷ÏµÍ³£¨°üÀ¨UNIX,Linux,ºÍMS DOS£
 srand((unsigned)time(NULL));
 ```
 ÕâÑùÃ¿´Î²ÅÄÜ²úÉú²»Í¬µÄËæ»úÊý¡£
+ÔÚÒ»¸ö³ÌÐòÖÐ£¬Í¨¹ýÖ´ÐÐ¸ÃÓï¾äºó£¬½ÓÏÂÀ´Ã¿´Îµ÷ÓÃrand()¶¼»á²úÉú²»Í¬µÄËæ»úÊý£¬ÒòÎªÃ¿´ÎÏµÍ³Ìá¹©µÄÖÖ×Ó¶¼²»Í¬£¬ÓÉµ±Ç°Ê±¼ä¾ö¶¨¡£
 ÏÞ¶¨Ëæ»úÊýµÄ·¶Î§£º
 **Í¨¹ý%ÊµÏÖ**
 ±ÈÈç£¬²úÉú0-9µÄËæ»úÊý£º
@@ -34,3 +35,20 @@ srand((unsigned)time(NULL));
 int a = rand() % 10;    //²úÉú0~9µÄËæ»úÊý£¬×¢Òâ10»á±»Õû³ý
 ```
 [²Î¿¼Á´½Ó](http://c.biancheng.net/view/2043.html)
+##### 7. GetAsyncKeyStateº¯Êý
+·µ»ØÖµÀàÐÍÎªshort£¬Õ¼2¸ö×Ö½Ú£¬
+**¹¦ÄÜ£º** 
+GetAsyncKeyStateµÄ·µ»ØÖµ±íÊ¾Á½¸öÄÚÈÝ£¬Ò»¸öÊÇ×î¸ßÎ»bitµÄÖµ£¬´ú±íÕâ¸ö¼üÊÇ·ñ±»°´ÏÂ£¬Ò»¸öÊÇ×îµÍÎ»bitµÄÖµ£¬´ú±íÔÚÉÏ´Îµ÷ÓÃ
+GetAsyncKeyStateºó£¬Õâ¸ö¼üÊÇ·ñ±»°´ÏÂ¡£
+ËùÒÔÈÃ¼üÅÌµÄ"ÉÏÏÂ×óÓÒ"³ö·¢ÊÂ¼þ¿ÉÒÔÕâÑùÐ´£º
+```
+if( ::GetAsyncKeyState(VK_LEFT) & 0x8000 )
+code...
+if( ::GetAsyncKeyState(VK_RIGHT)& 0x8000 )
+code...
+if( ::GetAsyncKeyState(VK_UP) & 0x8000 )
+code...
+if( ::GetAsyncKeyState(VK_DOWN) & 0x8000 )
+code...
+```
+¡°Óë¡±Ê®Áù½øÖÆµÄ0x8000£¬¶þ½øÖÆÎª1000 0000 0000 0000 ¸ÕºÃ2¸ö×Ö½Ú£¬Ö»¿´×î¸ßÎ»µÄ×´Ì¬£¬¼´¿´¡°ÉÏÏÂ×óÓÒ¡±¼üÊÇ·ñ±»°´ÏÂ¡£

@@ -1,6 +1,7 @@
 # GreedySnake
 Design greedy snake!
 
-ç ”è¯»æŸCSDNå¤§ä½¬çš„è´ªåƒè›‡é¡¹ç›®ï¼š
+ÑĞ¶ÁÄ³CSDN´óÀĞµÄÌ°³ÔÉßÏîÄ¿£º
 
-[(4æ¡æ¶ˆæ¯) ã€Cè¯­è¨€ã€‘è´ªåƒè›‡æ¸¸æˆçš„å®ç°ï¼ˆä¸€ï¼‰_includeiçš„åšå®¢-CSDNåšå®¢_cè¯­è¨€è´ªåƒè›‡](https://blog.csdn.net/includei/article/details/85311707)
+[(4ÌõÏûÏ¢) ¡¾CÓïÑÔ¡¿Ì°³ÔÉßÓÎÏ·µÄÊµÏÖ£¨Ò»£©_includeiµÄ²©¿Í-CSDN²©¿Í_cÓïÑÔÌ°³ÔÉß](https://blog.csdn.net/includei/article/details/85311707)
+¾­ĞŞ¸Ä£¬¸Ã¸Ã´úÂë¿ÉÒÔÔÚCode::BlocksÉÏÕı³£ÔËĞĞ¡£
